@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    
+    </head>
+    <body ng-app="myapp">
+        <h1>Angular JS Routing</h1>
+        <div class="body" ng-view>
+            
+        </div>
+        <div>
+            <a href="#/!">Home</a>
+            <a href="#!login">Login</a>
+            <a href="#!mark">Marklist</a>
+        </div>
+        <div class="body">
+        </div>
+        <script>
+            var app=angular.module('myapp',['ngRoute']);
+            app.config(function($routeProvider){
+                $routeProvider.when('/',{
+                    templateUrl:'home.html'
+                })
+                .when("/login",{
+                    templateUrl:'login.html',
+                    controller: 'loginController'
+                })
+                .when("/student",{
+                    templateUrl:'student.html',
+                    controller: 'studentController'
+                })
+                .when("/mark",{
+                    templateUrl:'mark.html',
+                    controller: 'markController'
+                })
+                .otherwise({redirectTo:'/'})
+            });
+            app.controller("loginController", function ($scope, $location) {
+                $scope.authenticate = function (username) {
+               // write authentication code here.. 
+                    $location.path('/student/' + username)
+                }
+            });
+            app.controller("studentController", function ($scope, $routeParams) {
+            $scope.username = $routeParams.username;
+            });
+            app.controller("markController", function ($scope, $routeParams) {
+            $scope.marks=[
+                {name:'Ali',sub:'Eng',mark:'97'},
+                {name:'Bele',sub:'Phy',mark:'92'},
+                {name:'Ctherine',sub:'Chem',mark:'95'},
+                {name:'Danny',sub:'Math',mark:'98'},       
+                {name:'Elena',sub:'Bio',mark:'99'}
+            ]
+            });
+        </script>
+    </body>
+</html>

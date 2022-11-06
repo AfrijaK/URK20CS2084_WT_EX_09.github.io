@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Marklist</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+        <style>
+            table{
+                background-color: aliceblue;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>MarkList</h1>
+        <table border='1' cellspacing="0">
+            <tr><th>Student Name</th><th>Subject</th><th>Mark</th></tr>
+            <tr ng-repeat="val in marks"><td>{{val.name}}</td>
+                <td>{{val.sub}}</td>
+                <td>{{val.mark}}</td>
+            </tr>
+        </table>    
+    </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Routing
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+        <style>
+            body{
+                background-repeat: no-repeat;
+                background-size: cover;
+                margin-top: 30px;
+            }
+            a{
+                text-decoration: none;
+                color: aliceblue;
+            }
+            a:hover{
+                padding: 1rem;
+                background-color: rgb(9, 83, 83);
+                color: azure;
+                font-size: medium;
+            }
+        </style>
+    </head>
+    <body background="https://tse3.mm.bing.net/th?id=OIP.iNLMwkv9oe3tOk3xDc0IsgHaFj&pid=Api&P=0" ng-app="myApp">
+        <div>
+            <div>
+                <a href="#!home">Home</a>&nbsp;&nbsp;
+                <a href="#!login">Login</a>&nbsp;&nbsp;
+                <a href="#!mark">MarkList</a>&nbsp;&nbsp;
+                <a href="#!college">About College</a>
+            </div>
+            <ng-view></ng-view>
+        </div>
+        <script>
+            var app = angular.module("myApp", ["ngRoute"]);
+            app.config(function($routeProvider) {
+              $routeProvider
+              .when("/route", {
+                templateUrl : "route.html"
+              })
+              .when("/home", {
+                templateUrl : "home.html",
+                controller: 'homeController'
+              })
+              .when("/login", {
+                templateUrl : "login.html",
+                controller: 'loginController'
+              })
+              .when("/student", {
+                templateUrl : "student.html",
+                controller: 'studentController'
+              })
+              .when("/mark", {
+                templateUrl : "mark.html",
+                controller: 'markController'
+              })
+              .when("/college", {
+                templateUrl : "college.html",
+                controller: 'collegeController'
+              })
+              .otherwise({redirectTo:'/'})
+            });
+            
+            app.controller("homeController", function ($scope, $location) {
+                $scope.wel='Welcome';
+            });
+            app.controller("loginController", function ($scope, $location) {
+                $scope.authenticate = function (username) {
+               // write authentication code here.. 
+                    
+                $location.path('/student/' + username);
+                    }
+                
+                
+            });
+            app.controller("studentController", function ($scope, $routeParams) {
+            $scope.username = $routeParams.username;
+            });
+            app.controller("markController", function ($scope, $routeParams) {
+            $scope.marks=[
+                {name:'Ali',sub:'Eng',mark:'97'},
+                {name:'Bele',sub:'Phy',mark:'92'},
+                {name:'Ctherine',sub:'Chem',mark:'95'},
+                {name:'Danny',sub:'Math',mark:'98'},       
+                {name:'Elena',sub:'Bio',mark:'99'}
+            ]
+            });
+            </script>
+    </body>
+</html>
